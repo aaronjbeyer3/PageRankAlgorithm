@@ -124,8 +124,8 @@ int main(int argc, char** argv)
     {
         
         //for(int i = 0; i < n; i++){//calc new page rank
-          //  for(int k = 0; k < numberOfPeoplePointToME; k++){
-            //    newPageRank[i] += (pointers[k].pr/pointers[k].outD);
+          //  for(int k = 0; k < nodes[i].pointers.size(); k++){
+            //    newPageRank[i] += (nodes[i].pointers[k].pr/nodes[i].pointers[k].outD);
             //}
         //}
 
