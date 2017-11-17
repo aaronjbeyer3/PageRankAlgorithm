@@ -92,7 +92,7 @@ int main(int argc, char** argv)
         struct nodeData temp;
         temp.pr = 1.0/n;
         temp.outD = d;
-        nodes[i](temp);
+        nodes[i] = temp;
     }
     
     //test print
