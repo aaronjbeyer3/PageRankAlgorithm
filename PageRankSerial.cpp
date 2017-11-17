@@ -27,6 +27,7 @@ AdjacencyMatrix adjMatrix;
 
 void printVector(vector<nodeData> nD, bool printAll)
 {
+  float sum = 0.0;
   if(printAll)
   {
     for (int i = 0; i < n; i++)
@@ -36,6 +37,7 @@ void printVector(vector<nodeData> nD, bool printAll)
         for(int j = 0; j < nD[i].pointers.size(); j++)
             cout << nD[i].pointers[j] << ", ";
         cout << "]" << endl;
+        sum += nD[i].pr;
     }
   }
   else //only print pr values
@@ -43,8 +45,12 @@ void printVector(vector<nodeData> nD, bool printAll)
     for (int i = 0; i < n; i++)
     {
         cout << "[Node " << i << ":]     PR:  " << nD[i].pr << endl;
+        sum += nD[i].pr;
     }
   }
+
+  //test if pr values still add up to 1 (WHY NOT)
+  cout << "Sum of all PRs: " << sum << endl;
 
 }
 
