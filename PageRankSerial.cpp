@@ -25,8 +25,10 @@ int n;
 typedef vector<vector<int> > AdjacencyMatrix;
 AdjacencyMatrix adjMatrix;
 
-void printVector(vector<nodeData> nD)
+void printVector(vector<nodeData> nD, boolean printAll)
 {
+  if(printAll)
+  {
     for (int i = 0; i < n; i++)
     {
         cout << "[Node " << i << ":]     PR:  " << nD[i].pr << "     outD:  " << nD[i].outD;
@@ -35,6 +37,15 @@ void printVector(vector<nodeData> nD)
             cout << nD[i].pointers[j] << ", ";
         cout << "]" << endl;
     }
+  }
+  else //only print pr values
+  {
+    for (int i = 0; i < n; i++)
+    {
+        cout << "[Node " << i << ":]     PR:  " << nD[i].pr << endl;
+    }
+  }
+
 }
 
 int main(int argc, char** argv)
@@ -113,7 +124,7 @@ int main(int argc, char** argv)
     
     //test print
     cout << "STARTING VALUES" << endl;
-    printVector(nodes);
+    printVector(nodes, true);
     cout << endl;
     
     //===============================================================================
@@ -156,7 +167,7 @@ int main(int argc, char** argv)
         
         
         //print out results of loop
-        printVector(nodes);
+        printVector(nodes, false);
         cout << endl;
     }
 
