@@ -89,7 +89,7 @@ int main(int argc, char** argv)
     
     for (int i=0; i<n; i++)
     {
-        cout << "Node " << i << ": " << nodes[i].outD << endl;
+        cout << "Node " << i << ": " << nodes[i].pr << endl;
     }
     
 
