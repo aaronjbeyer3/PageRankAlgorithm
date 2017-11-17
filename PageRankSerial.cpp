@@ -17,7 +17,7 @@ struct nodeData
     int outD;
 }
 
-final float S_VALUE = 0.8;
+const float S_VALUE = 0.8;
 
 typedef vector<vector<int> > AdjacencyMatrix;
 AdjacencyMatrix adjMatrix;
@@ -82,8 +82,8 @@ int main(int argc, char** argv)
     for(int i=0; i<n; i++)
     {
         struct nodeData temp;
-        temp->pr = 1.0/n;
-        temp->outD = i;
+        temp.pr = 1.0/n;
+        temp.outD = i;
         nodes.push_back(temp);
     }
     
