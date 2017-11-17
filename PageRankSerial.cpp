@@ -139,39 +139,28 @@ int main(int argc, char** argv)
     vector<float> newPageRanks = vector<float>(n);
     for(int i = 0; i < numLoops; i++)
     {
+        cout << "=====================" << endl;
+        cout << "HELLO!!! I'M LOOP #" << i << "     :D" << endl;
+        cout << "=====================" << endl;
+        
         // calc new page ranks
         for(int i = 0; i < n; i++)
         {
+            float sumOfInfluence = 0.0;
+            
             for(int k = 0; k < nodes[i].pointers.size(); k++){
                 int p = nodes[i].pointers[k];
-                newPageRanks[i] += (nodes[p].pr/nodes[p].outD);
+                sumOfInfluence += (nodes[p].pr/nodes[p].outD);
             }
             
+            newPageRanks[i] = (1-S_VALUE) + (sumOfInfluence * S_VALUE);
         }
         
         // sets new page rank
         for(int i = 0; i < n; i++){
             nodes[i].pr = newPageRanks[i];
-        }
-        
-        //APPLY S FACTOR
-        for(int i = 0; i < n; i++){
-            nodes[i].pr = nodes[i].pr*S_VALUE;
-        }
-        
-        //Add residual
-        float residual = (1-S_VALUE)/n;
-        for(int i = 0; i < n; i++){
-            nodes[i].pr += residual;
-        }
-        
-        cout << "=====================" << endl;
-        cout << "HELLO!!! I'M LOOP #" << i << "     :D" << endl;
-        cout << "=====================" << endl;
-        
-        //ADD ALGORITHM HERE!!!
-        
-        
+        }   
+
         //print out results of loop
         printVector(nodes, false);
         cout << endl;
