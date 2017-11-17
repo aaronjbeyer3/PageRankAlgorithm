@@ -122,16 +122,20 @@ int main(int argc, char** argv)
     vector<float> newPageRanks = vector<float>(n);
     for(int i = 0; i < numLoops; i++)
     {
+        // calc new page ranks
+        for(int i = 0; i < n; i++)
+        {
+            for(int k = 0; k < nodes[i].pointers.size(); k++){
+                int p = nodes[i].pointers[k];
+                newPageRank[i] += (nodes[p].pr/nodes[p].outD);
+            }
+            
+        }
         
-        //for(int i = 0; i < n; i++){//calc new page rank
-          //  for(int k = 0; k < nodes[i].pointers.size(); k++){
-            //    newPageRank[i] += (nodes[i].pointers[k].pr/nodes[i].pointers[k].outD);
-            //}
-        //}
-
-        //for(int i = 0; i < n; i++){
-          //  nodes[i].pr = newPageRank[i];
-        //}
+        // sets new page rank
+        for(int i = 0; i < n; i++){
+            nodes[i].pr = newPageRank[i];
+        }
         
         
         
