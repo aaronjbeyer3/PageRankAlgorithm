@@ -18,9 +18,18 @@ struct nodeData
 };
 
 const float S_VALUE = 0.8;
+int n;
 
 typedef vector<vector<int> > AdjacencyMatrix;
 AdjacencyMatrix adjMatrix;
+
+void printVector(vector<nodeData> nD)
+{
+    for (int i = 0; i < n; i++)
+    {
+        cout << "[Node " << i << ":]     PR:  " << nD[i].pr << "     outD:  " << nD[i].outD << endl;
+    }
+}
 
 int main(int argc, char** argv)
 {
@@ -50,11 +59,11 @@ int main(int argc, char** argv)
           maxNode = v;                 
     }
 
-    int n = maxNode +1;  //Since nodes starts with 0
-    cout<<endl;
-    cout<<"Graph has "<< n <<" nodes"<<endl;
+    n = maxNode +1;  //Since nodes starts with 0
+    cout << endl;
+    cout << "Graph has " << n << " nodes" << endl << endl;
 
-    adjMatrix = AdjacencyMatrix(n,vector<int>(n));
+    adjMatrix = AdjacencyMatrix(n, vector<int>(n));
     //populate the matrix
     for(int i = 0; i < allEdges.size() ; i++){
        u = allEdges[i].first;
@@ -87,17 +96,25 @@ int main(int argc, char** argv)
     }
     
     //test print
-    for (int i = 0; i < n; i++)
-    {
-        cout << "Node " << i << ": " << nodes[i].pr << " " << nodes[i].outD << endl;
-    }
+    cout << "STARTING VALUES" << endl;
+    printVector(nodes);
+    cout << endl;
     
     //===============================================================================
     //START LOOPING HERE
     //===============================================================================
     for(int i = 0; i < numLoops; i++)
     {
+        cout << "=====================" << endl;
         cout << "HELLO!!! I'M LOOP #" << i << "     :D" << endl;
+        cout << "=====================" << endl;
+        
+        //ADD ALGORITHM HERE!!!
+        
+        
+        //print out results of loop
+        printVector(nodes);
+        cout << endl;
     }
 
     //stop clock
