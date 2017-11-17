@@ -1,7 +1,7 @@
 //CSCI415; Aaron Beyer/Leighton Covington/Brian Engelbrecht, 11/28/2017
 //To compile: g++ -O3 -w PageRankSerial.cpp -o PageRankSerial
-//To run: ./PageRankSerial filename
-//./PageRankSerial networkDatasets/toyGraph1.txt
+//To run: ./PageRankSerial filename numLoops
+//./PageRankSerial networkDatasets/toyGraph1.txt 5
 #include <stdio.h>      /* printf, fgets */
 #include <stdlib.h>  /* atoi */
 #include <iostream>
@@ -24,9 +24,9 @@ AdjacencyMatrix adjMatrix;
 
 int main(int argc, char** argv)
 {
-    if(argc<2){
-      cout<<"To run: ./PageRankSerial filename"<<endl;
-      cout<<"./PageRankSerial networkDatasets/toyGraph1.txt"<<endl;
+    if(argc<3){
+      cout<<"To run: ./PageRankSerial filename numLoops"<<endl;
+      cout<<"./PageRankSerial networkDatasets/toyGraph1.txt 5"<<endl;
       return 0;
     }
       
@@ -36,6 +36,7 @@ int main(int argc, char** argv)
     clock_gettime(CLOCK_MONOTONIC, &start);
 
     fstream myfile(argv[1],std::ios_base::in);
+    int numLoops = atoi(argv[2]);
     int u,v;
     int maxNode = 0;
     vector<pair<int,int> > allEdges;
@@ -55,7 +56,7 @@ int main(int argc, char** argv)
 
     adjMatrix = AdjacencyMatrix(n,vector<int>(n));
     //populate the matrix
-    for(int i =0; i<allEdges.size() ; i++){
+    for(int i = 0; i < allEdges.size() ; i++){
        u = allEdges[i].first;
        v = allEdges[i].second;
        adjMatrix[u][v] = 1;
@@ -72,10 +73,10 @@ int main(int argc, char** argv)
     
     // initialize nodes
     vector<nodeData> nodes;
-    for(int i=0; i<n; i++)
+    for(int i = 0; i < n; i++)
     {
         int d = 0;
-        for(int j=0; j<n; j++)
+        for(int j = 0; j < n; j++)
             if(adjMatrix[i][j] == 1)
                 d++;
         
@@ -86,11 +87,18 @@ int main(int argc, char** argv)
     }
     
     //test print
-    for (int i=0; i<n; i++)
+    for (int i = 0; i < n; i++)
     {
         cout << "Node " << i << ": " << nodes[i].pr << " " << nodes[i].outD << endl;
     }
     
+    //===============================================================================
+    //START LOOPING HERE
+    //===============================================================================
+    for(int i = 0; i < numLoops; i++)
+    {
+        cout << "HELLO!!! I'M LOOP #" << i << "     :D" << endl;
+    }
 
     //stop clock
     clock_gettime(CLOCK_MONOTONIC, &finish);
