@@ -81,7 +81,7 @@ int main(int argc, char** argv)
     //
     
     // initialize nodes
-    vector<nodeData> nodes;
+    vector<nodeData> nodes = vector<nodeData>(n);
     for(int i = 0; i < n; i++)
     {
         int d = 0;
@@ -92,7 +92,7 @@ int main(int argc, char** argv)
         struct nodeData temp;
         temp.pr = 1.0/n;
         temp.outD = d;
-        nodes.push_back(temp);
+        nodes[i](temp);
     }
     
     //test print
