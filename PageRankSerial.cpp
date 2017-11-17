@@ -15,6 +15,8 @@ struct nodeData
 {
     float pr;
     int outD;
+    int inD;
+    vector<int> pointers;
 };
 
 const float S_VALUE = 0.8;
@@ -27,7 +29,11 @@ void printVector(vector<nodeData> nD)
 {
     for (int i = 0; i < n; i++)
     {
-        cout << "[Node " << i << ":]     PR:  " << nD[i].pr << "     outD:  " << nD[i].outD << endl;
+        cout << "[Node " << i << ":]     PR:  " << nD[i].pr << "     outD:  " << nD[i].outD;
+        cout << "     pointers: [";
+        for(int j=0; j<nD.pointers.size(); j++)
+            cout << nD.pointers[j] << ", ";
+        cout << endl;
     }
 }
 
@@ -93,6 +99,16 @@ int main(int argc, char** argv)
         temp.pr = 1.0/n;
         temp.outD = d;
         nodes[i] = temp;
+    }
+    
+    // populate pointer vectors for each node
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+            if(adjMatrix[i][j] == 1)
+                nodes[j].pointers.push_back(i);
+        }
     }
     
     //test print
