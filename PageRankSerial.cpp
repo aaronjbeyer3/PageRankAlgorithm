@@ -1,5 +1,5 @@
-//CSCI415; Aaron Beyer/Leighton Covington/Brian Engelbrecht, mm/dd/2017
-//To compile: g++ -O3 -w PageRankSerial.cpp -lpthread -o PageRankSerial
+//CSCI415; Aaron Beyer/Leighton Covington/Brian Engelbrecht, 11/28/2017
+//To compile: g++ -O3 -w PageRankSerial.cpp -o PageRankSerial
 //To run: ./PageRankSerial filename
 //./PageRankSerial networkDatasets/toyGraph1.txt
 #include <stdio.h>      /* printf, fgets */
