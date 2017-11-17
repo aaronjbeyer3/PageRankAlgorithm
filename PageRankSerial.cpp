@@ -88,7 +88,7 @@ int main(int argc, char** argv)
     //test print
     for (int i=0; i<n; i++)
     {
-        cout << "Node " << i << ": " << nodes[i].pr << endl;
+        cout << "Node " << i << ": " << nodes[i].pr << " " << nodes[i].outD << endl;
     }
     
 
