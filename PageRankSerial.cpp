@@ -31,8 +31,8 @@ void printVector(vector<nodeData> nD)
     {
         cout << "[Node " << i << ":]     PR:  " << nD[i].pr << "     outD:  " << nD[i].outD;
         cout << "     pointers: [";
-        for(int j=0; j<nD.pointers.size(); j++)
-            cout << nD.pointers[j] << ", ";
+        for(int j = 0; j < nD[i].pointers.size(); j++)
+            cout << nD[i].pointers[j] << ", ";
         cout << endl;
     }
 }
