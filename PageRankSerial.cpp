@@ -13,8 +13,8 @@ using namespace std;
 
 struct nodeData
 {
-    float pr,
-    int outD
+    float pr;
+    int outD;
 }
 
 final static float S_VALUE = 0.8;
