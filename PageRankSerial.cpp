@@ -15,7 +15,7 @@ struct nodeData
 {
     float pr;
     int outD;
-}
+};
 
 const float S_VALUE = 0.8;
 
