@@ -25,7 +25,7 @@ int n;
 typedef vector<vector<int> > AdjacencyMatrix;
 AdjacencyMatrix adjMatrix;
 
-void printVector(vector<nodeData> nD, boolean printAll)
+void printVector(vector<nodeData> nD, bool printAll)
 {
   if(printAll)
   {
