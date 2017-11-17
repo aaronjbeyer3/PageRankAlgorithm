@@ -73,7 +73,7 @@ int main(int argc, char** argv)
     vector<pair<int,float> > nodes;
     for(int i=0; i<n; i++)
     {
-        nodes.push_back(make_pair(i,1/n));
+        nodes.push_back(make_pair(i, 1.0/n ));
     }
     
     for (int i=0; i<n; i++)
