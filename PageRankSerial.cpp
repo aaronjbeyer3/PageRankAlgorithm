@@ -137,7 +137,16 @@ int main(int argc, char** argv)
             nodes[i].pr = newPageRanks[i];
         }
         
+        //APPLY S FACTOR
+        for(int i = 0; i < n; i++){
+            nodes[i].pr = nodes[i].pr*S_VALUE;
+        }
         
+        //Add residual
+        float residual = (1-S_VALUE)/n;
+        for(int i = 0; i < n; i++){
+            nodes[i].pr += residual;
+        }
         
         cout << "=====================" << endl;
         cout << "HELLO!!! I'M LOOP #" << i << "     :D" << endl;
