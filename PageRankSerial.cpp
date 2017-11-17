@@ -88,6 +88,7 @@ int main(int argc, char** argv)
     elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
     
     //Print out result
+    cout << endl;
     cout<< "Time: " << elapsed << " s" << endl; 
     cout << endl;
     
