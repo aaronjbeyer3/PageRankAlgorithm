@@ -62,14 +62,6 @@ int main(int argc, char** argv)
        //adjMatrix[v][u] = 1; directed graph so this line removed
     }
 
-
-
-    // ADD CODE HERE
-
-    //HELLO MY NAME IS AARON
-    
-    //Hello my name is Brian
-
     //STEPS
     //DONE - get n for directed graph (adjmatrix but only [u][v])
     //DONE - calculate starting PR for each node (1/n)
@@ -78,15 +70,22 @@ int main(int argc, char** argv)
     //
     //
     
+    // initialize nodes
     vector<nodeData> nodes;
     for(int i=0; i<n; i++)
     {
+        int d = 0;
+        for(int j=0; j<n; j++)
+            if(adjMatrix[i][j] == 1)
+                d++;
+        
         struct nodeData temp;
         temp.pr = 1.0/n;
-        temp.outD = i;
+        temp.outD = d;
         nodes.push_back(temp);
     }
     
+    //test print
     for (int i=0; i<n; i++)
     {
         cout << "Node " << i << ": " << nodes[i].pr << endl;
