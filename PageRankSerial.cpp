@@ -51,7 +51,7 @@ int main(int argc, char** argv)
        u = allEdges[i].first;
        v = allEdges[i].second;
        adjMatrix[u][v] = 1;
-       adjMatrix[v][u] = 1;
+       //adjMatrix[v][u] = 1; directed graph so this line removed
     }
 
 
@@ -61,6 +61,14 @@ int main(int argc, char** argv)
     //HELLO MY NAME IS AARON
     
     //Hello my name is Brian
+
+    //STEPS
+    //get n for directed graph (adjmatrix but only [u][v])
+    //calculate starting PR for each node (1/n)
+    //
+    //
+    //
+    //
 
     //stop clock
     clock_gettime(CLOCK_MONOTONIC, &finish);
