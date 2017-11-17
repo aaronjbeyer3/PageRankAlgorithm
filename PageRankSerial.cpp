@@ -103,8 +103,22 @@ int main(int argc, char** argv)
     //===============================================================================
     //START LOOPING HERE
     //===============================================================================
+    vector<float> newPageRanks = vector<float>(n);
     for(int i = 0; i < numLoops; i++)
     {
+        
+        //for(int i = 0; i < n; i++){//calc new page rank
+          //  for(int k = 0; k < numberOfPeoplePointToME; k++){
+            //    newPageRank[i] += (pointers[k].pr/pointers[k].outD);
+            //}
+        //}
+
+        //for(int i = 0; i < n; i++){
+          //  nodes[i].pr = newPageRank[i];
+        //}
+        
+        
+        
         cout << "=====================" << endl;
         cout << "HELLO!!! I'M LOOP #" << i << "     :D" << endl;
         cout << "=====================" << endl;
