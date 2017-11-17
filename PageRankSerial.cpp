@@ -11,6 +11,14 @@
 
 using namespace std;
 
+struct nodeData
+{
+    float pr,
+    int outD
+}
+
+final static float S_VALUE = 0.8;
+
 typedef vector<vector<int> > AdjacencyMatrix;
 AdjacencyMatrix adjMatrix;
 
@@ -63,22 +71,22 @@ int main(int argc, char** argv)
     //Hello my name is Brian
 
     //STEPS
-    //get n for directed graph (adjmatrix but only [u][v])
-    //calculate starting PR for each node (1/n)
+    //DONE - get n for directed graph (adjmatrix but only [u][v])
+    //DONE - calculate starting PR for each node (1/n)
     //
     //
     //
     //
     
-    vector<pair<int,float> > nodes;
+    vector<nodeData> nodes;
     for(int i=0; i<n; i++)
     {
-        nodes.push_back(make_pair(i, 1.0/n ));
+        nodes.push_back(new nodeData(1.0/n, i));
     }
     
     for (int i=0; i<n; i++)
     {
-        cout << "Node " << i << ": " << nodes[i].second << endl;
+        cout << "Node " << i << ": " << nodes[i].outD << endl;
     }
     
 
