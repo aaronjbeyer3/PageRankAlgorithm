@@ -81,7 +81,10 @@ int main(int argc, char** argv)
     vector<nodeData> nodes;
     for(int i=0; i<n; i++)
     {
-        nodes.push_back(new nodeData(1.0/n, i));
+        struct nodeData temp;
+        temp->pr = 1.0/n;
+        temp->outD = i;
+        nodes.push_back(temp);
     }
     
     for (int i=0; i<n; i++)
