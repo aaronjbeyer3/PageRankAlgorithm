@@ -17,7 +17,7 @@ struct nodeData
     int outD;
 }
 
-final static float S_VALUE = 0.8;
+final float S_VALUE = 0.8;
 
 typedef vector<vector<int> > AdjacencyMatrix;
 AdjacencyMatrix adjMatrix;
