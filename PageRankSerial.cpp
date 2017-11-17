@@ -127,14 +127,14 @@ int main(int argc, char** argv)
         {
             for(int k = 0; k < nodes[i].pointers.size(); k++){
                 int p = nodes[i].pointers[k];
-                newPageRank[i] += (nodes[p].pr/nodes[p].outD);
+                newPageRanks[i] += (nodes[p].pr/nodes[p].outD);
             }
             
         }
         
         // sets new page rank
         for(int i = 0; i < n; i++){
-            nodes[i].pr = newPageRank[i];
+            nodes[i].pr = newPageRanks[i];
         }
         
         
