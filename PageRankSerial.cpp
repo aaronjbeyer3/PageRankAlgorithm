@@ -69,6 +69,18 @@ int main(int argc, char** argv)
     //
     //
     //
+    
+    vector<pair<int,float> > nodes;
+    for(int i=0; i<n; i++)
+    {
+        nodes.push_back(make_pair(i,1/n));
+    }
+    
+    for (int i=0; i<n; i++)
+    {
+        cout << "Node " << i << ": " << nodes[i] << endl;
+    }
+    
 
     //stop clock
     clock_gettime(CLOCK_MONOTONIC, &finish);
