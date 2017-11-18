@@ -146,6 +146,7 @@ int main(int argc, char** argv)
         // calc new page ranks
         for(int i = 0; i < n; i++)
         {
+            cout << endl;
             cout << "CURRENT NODE: " << i << endl;
             float sumOfInfluence = 0.0;
             
@@ -157,9 +158,9 @@ int main(int argc, char** argv)
             
             sumOfInfluence *= S_VALUE;
             cout << "sumOfInfluence: " << sumOfInfluence << endl;
-            cout << "1- S_VALUE: " << (1-S_VALUE) << endl;
+            cout << "(1- S_VALUE)/n: " << (1-S_VALUE)/n << endl;
             
-            newPageRanks[i] = (1-S_VALUE) +  sumOfInfluence;
+            newPageRanks[i] = (1-S_VALUE)/n +  sumOfInfluence;
             cout << "newPageRank: " << newPageRanks[i] << endl;
               
             
