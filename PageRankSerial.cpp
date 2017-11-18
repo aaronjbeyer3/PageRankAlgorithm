@@ -160,7 +160,7 @@ int main(int argc, char** argv)
             cout << "sumOfInfluence: " << sumOfInfluence << endl;
             cout << "(1- S_VALUE): " << (1-S_VALUE) << endl;
             
-            newPageRanks[i] = (1-S_VALUE) +  sumOfInfluence;
+            newPageRanks[i] = (1-S_VALUE)/n +  sumOfInfluence;
             cout << "newPageRank: " << newPageRanks[i] << endl;
               
             
