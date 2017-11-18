@@ -72,14 +72,50 @@ int main(int argc, char** argv)
     int u,v;
     int maxNode = 0;
     vector<pair<int,int> > allEdges;
+
+    //vector pair to remap i guess
+    vector<int> killMe;
+    bool existsU, existsV;
     while(myfile >> u >> v)
     {
-        allEdges.push_back(make_pair(u,v));
-        if(u > maxNode)
-          maxNode = u;
+      existsU = false;
+      existsV = false;
 
-        if(v > maxNode)
-          maxNode = v;                 
+      //check to see if it exists
+      for(int i = 0; i < killMe.size(); i++)
+      {
+        if(killMe[i] == u)
+        {
+          u = i;
+          existsU = true;
+        }
+        else if(killMe[i] == v)
+        {
+          v = i;
+          existsV = true;
+        }
+      }
+
+      //if u doesn't exist
+      if(!existsU)
+      {
+        u = killMe.size();
+        killMe.push_back(u);      
+      }
+
+      //if v doesn't exist
+      if(!existsV)
+      {
+        v = killMe.size();
+        killMe.push_back(v);       
+      }
+
+      allEdges.push_back(make_pair(u,v));
+      if(u > maxNode)
+        maxNode = u;
+
+      if(v > maxNode)
+        maxNode = v;                 
     }
 
     n = maxNode +1;  //Since nodes starts with 0
@@ -95,14 +131,16 @@ int main(int argc, char** argv)
        //adjMatrix[v][u] = 1; directed graph so this line removed
     }
 
-    //STEPS
-    //DONE - get n for directed graph (adjmatrix but only [u][v])
-    //DONE - calculate starting PR for each node (1/n)
-    //
-    //
-    //
-    //
+
+    for(int i=0; i<killMe.size(); i++)
+    {
+      cout << "[Node" << i << ":] " << killMe[i] << endl;
+    }
+
+
     
+/*
+
     // initialize nodes
     vector<nodeData> nodes = vector<nodeData>(n);
     for(int i = 0; i < n; i++)
@@ -176,6 +214,8 @@ int main(int argc, char** argv)
         printVector(nodes, false);
         cout << endl;
     }
+
+*/
 
     //stop clock
     clock_gettime(CLOCK_MONOTONIC, &finish);
