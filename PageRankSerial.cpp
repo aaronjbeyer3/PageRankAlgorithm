@@ -153,7 +153,7 @@ int main(int argc, char** argv)
                 sumOfInfluence += (nodes[p].pr/nodes[p].outD);
             }
             
-            newPageRanks[i] = ((1-S_VALUE)/n) + (sumOfInfluence * S_VALUE);
+            newPageRanks[i] = (1-S_VALUE) + (sumOfInfluence * S_VALUE);
         }
         
         // sets new page rank
