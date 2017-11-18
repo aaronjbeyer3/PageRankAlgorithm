@@ -19,7 +19,7 @@ struct nodeData
     vector<int> pointers;
 };
 
-const float S_VALUE = 0.8;
+const float S_VALUE = 0.85;
 int n;
 
 typedef vector<vector<int> > AdjacencyMatrix;
@@ -158,9 +158,9 @@ int main(int argc, char** argv)
             
             sumOfInfluence *= S_VALUE;
             cout << "sumOfInfluence: " << sumOfInfluence << endl;
-            cout << "(1- S_VALUE)/n: " << (1-S_VALUE)/n << endl;
+            cout << "(1- S_VALUE): " << (1-S_VALUE) << endl;
             
-            newPageRanks[i] = (1-S_VALUE)/n +  sumOfInfluence;
+            newPageRanks[i] = (1-S_VALUE) +  sumOfInfluence;
             cout << "newPageRank: " << newPageRanks[i] << endl;
               
             
