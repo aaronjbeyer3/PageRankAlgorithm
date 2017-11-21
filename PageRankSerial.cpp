@@ -99,15 +99,15 @@ int main(int argc, char** argv)
       //if u doesn't exist
       if(!existsU)
       {
-        u = killMe.size();
-        killMe.push_back(u);      
+        killMe.push_back(u);
+        u = killMe.size() - 1;           
       }
 
       //if v doesn't exist
       if(!existsV)
       {
-        v = killMe.size();
-        killMe.push_back(v);       
+        killMe.push_back(v);   
+        v = killMe.size() - 1;          
       }
 
       allEdges.push_back(make_pair(u,v));
@@ -116,6 +116,28 @@ int main(int argc, char** argv)
 
       if(v > maxNode)
         maxNode = v;                 
+    }
+
+    // Map nodes that don't point to anything.
+    //(or else it doesn't work with PageRank, duhhhh)
+    int newNode=0;
+    int tempSize = allEdges.size();
+    bool dirExists;
+    for(int i=0; i<tempSize; i++)
+    {
+        dirExists = false;
+        for(int j=0; j<tempSize; j++)
+        {
+          if(allEdges[i].second == allEdges[j].first)
+            dirExists = true;
+        }
+        
+        //if it doesn't exist as a first, make it point to a node
+        if(!dirExists)
+        {
+          allEdges.push_back(make_pair(allEdges[i].second,newNode));
+          newNode++;
+        }
     }
 
     n = maxNode +1;  //Since nodes starts with 0
@@ -132,14 +154,10 @@ int main(int argc, char** argv)
     }
 
 
-    for(int i=0; i<killMe.size(); i++)
+    for(int i=0; i<20; i++)
     {
       cout << "[Node" << i << ":] " << killMe[i] << endl;
     }
-
-
-    
-/*
 
     // initialize nodes
     vector<nodeData> nodes = vector<nodeData>(n);
@@ -192,6 +210,7 @@ int main(int argc, char** argv)
                 int p = nodes[i].pointers[k];
                 sumOfInfluence += (nodes[p].pr/nodes[p].outD);
             }
+            /*
             cout << "sumOfInfluence: " << sumOfInfluence << endl;
             
             sumOfInfluence *= S_VALUE;
@@ -200,9 +219,9 @@ int main(int argc, char** argv)
             
             newPageRanks[i] = (1-S_VALUE)/n +  sumOfInfluence;
             cout << "newPageRank: " << newPageRanks[i] << endl;
-              
+              */
             
-            //newPageRanks[i] = (1-S_VALUE) + (sumOfInfluence * S_VALUE);
+            newPageRanks[i] = (1-S_VALUE)/n + (sumOfInfluence * S_VALUE);
         }
         
         // sets new page rank
@@ -214,8 +233,6 @@ int main(int argc, char** argv)
         printVector(nodes, false);
         cout << endl;
     }
-
-*/
 
     //stop clock
     clock_gettime(CLOCK_MONOTONIC, &finish);
