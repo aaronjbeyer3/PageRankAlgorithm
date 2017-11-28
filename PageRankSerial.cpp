@@ -1,11 +1,12 @@
 //CSCI415; Aaron Beyer/Leighton Covington/Brian Engelbrecht, 11/28/2017
-//To compile: g++ -O3 -w PageRankSerial.cpp -o PageRankSerial
+//To compile: g++ -std=c++11 -O3 -w PageRankSerial.cpp -o PageRankSerial
 //To run: ./PageRankSerial filename numLoops
-//./PageRankSerial networkDatasets/toyGraph1.txt 5
-#include <stdio.h>      /* printf, fgets */
-#include <stdlib.h>  /* atoi */
+//./PageRankSerial graph8722.txt 5
+#include <stdio.h>
+#include <stdlib.h>
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <vector>
 #include <time.h>
 
@@ -73,42 +74,47 @@ int main(int argc, char** argv)
     int maxNode = 0;
     vector<pair<int,int> > allEdges;
 
+
+
     //vector pair to remap i guess
-    vector<int> killMe;
-    bool existsU, existsV;
+      //vector<int> killMe;
+      //bool existsU, existsV;
     while(myfile >> u >> v)
     {
-      existsU = false;
-      existsV = false;
+      /*
+      //Code to re-map graph. Not needed anymore.
+        existsU = false;
+        existsV = false;
 
-      //check to see if it exists
-      for(int i = 0; i < killMe.size(); i++)
-      {
-        if(killMe[i] == u)
+        //check to see if it exists
+        for(int i = 0; i < killMe.size(); i++)
         {
-          u = i;
-          existsU = true;
+          if(killMe[i] == u)
+          {
+            u = i;
+            existsU = true;
+          }
+          else if(killMe[i] == v)
+          {
+            v = i;
+            existsV = true;
+          }
         }
-        else if(killMe[i] == v)
+
+        //if u doesn't exist
+        if(!existsU)
         {
-          v = i;
-          existsV = true;
+          killMe.push_back(u);
+          u = killMe.size() - 1;           
         }
-      }
 
-      //if u doesn't exist
-      if(!existsU)
-      {
-        killMe.push_back(u);
-        u = killMe.size() - 1;           
-      }
-
-      //if v doesn't exist
-      if(!existsV)
-      {
-        killMe.push_back(v);   
-        v = killMe.size() - 1;          
-      }
+        //if v doesn't exist
+        if(!existsV)
+        {
+          killMe.push_back(v);   
+          v = killMe.size() - 1;          
+        }
+      */
 
       allEdges.push_back(make_pair(u,v));
       if(u > maxNode)
@@ -118,27 +124,41 @@ int main(int argc, char** argv)
         maxNode = v;                 
     }
 
-    // Map nodes that don't point to anything.
-    //(or else it doesn't work with PageRank, duhhhh)
-    int newNode=0;
-    int tempSize = allEdges.size();
-    bool dirExists;
-    for(int i=0; i<tempSize; i++)
-    {
-        dirExists = false;
-        for(int j=0; j<tempSize; j++)
-        {
-          if(allEdges[i].second == allEdges[j].first)
-            dirExists = true;
-        }
-        
-        //if it doesn't exist as a first, make it point to a node
-        if(!dirExists)
-        {
-          allEdges.push_back(make_pair(allEdges[i].second,newNode));
-          newNode++;
-        }
-    }
+    /*// Map nodes that don't point to anything.
+      int newNode=0;
+      int tempSize = allEdges.size();
+      int addedSize = tempSize;
+      bool dirExists;
+      for(int i=0; i<tempSize; i++)
+      {
+          dirExists = false;
+          for(int j=0; j<addedSize; j++)
+          {
+            if(allEdges[i].second == allEdges[j].first)
+              dirExists = true;
+          }
+          
+          //if it doesn't exist as a first, make it point to a node
+          if(!dirExists)
+          {
+            allEdges.push_back(make_pair(allEdges[i].second,newNode));
+            newNode++;
+            addedSize++;
+          }
+      }
+    */
+
+    /*//OUTPUT GRAPH TO FILE HERE!!!!!
+      string file_name = "graph" + std::to_string(killMe.size()) + ".txt";
+      
+      ofstream out(file_name.c_str());
+      for(int i=0; i < allEdges.size(); i++)
+      {
+        out << allEdges[i].first << " " << allEdges[i].second << endl;
+      }
+
+      out.close();
+    */
 
     n = maxNode +1;  //Since nodes starts with 0
     cout << endl;
@@ -151,12 +171,6 @@ int main(int argc, char** argv)
        v = allEdges[i].second;
        adjMatrix[u][v] = 1;
        //adjMatrix[v][u] = 1; directed graph so this line removed
-    }
-
-
-    for(int i=0; i<20; i++)
-    {
-      cout << "[Node" << i << ":] " << killMe[i] << endl;
     }
 
     // initialize nodes
@@ -202,24 +216,15 @@ int main(int argc, char** argv)
         // calc new page ranks
         for(int i = 0; i < n; i++)
         {
-            cout << endl;
-            cout << "CURRENT NODE: " << i << endl;
+            //cout << endl;
+            //cout << "CURRENT NODE: " << i << endl;
             float sumOfInfluence = 0.0;
             
             for(int k = 0; k < nodes[i].pointers.size(); k++){
                 int p = nodes[i].pointers[k];
                 sumOfInfluence += (nodes[p].pr/nodes[p].outD);
             }
-            /*
-            cout << "sumOfInfluence: " << sumOfInfluence << endl;
             
-            sumOfInfluence *= S_VALUE;
-            cout << "sumOfInfluence: " << sumOfInfluence << endl;
-            cout << "(1- S_VALUE): " << (1-S_VALUE) << endl;
-            
-            newPageRanks[i] = (1-S_VALUE)/n +  sumOfInfluence;
-            cout << "newPageRank: " << newPageRanks[i] << endl;
-              */
             
             newPageRanks[i] = (1-S_VALUE)/n + (sumOfInfluence * S_VALUE);
         }
@@ -243,6 +248,6 @@ int main(int argc, char** argv)
     cout << endl;
     cout<< "Time: " << elapsed << " s" << endl; 
     cout << endl;
-    
+
     return 0;
 }
