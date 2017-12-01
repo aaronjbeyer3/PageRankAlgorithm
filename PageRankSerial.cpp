@@ -1,7 +1,7 @@
 //CSCI415; Aaron Beyer/Leighton Covington/Brian Engelbrecht, 11/28/2017
 //To compile: g++ -std=c++11 -O3 -w PageRankSerial.cpp -o PageRankSerial
-//To run: ./PageRankSerial filename numLoops
-//./PageRankSerial graph8722.txt 5
+//To run: ./PageRankSerial filename numLoops debugMode(0 or 1)
+//./PageRankSerial graph8722.txt 5 0
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -59,9 +59,9 @@ void printVector(vector<nodeData> nD, bool printAll)
 
 int main(int argc, char** argv)
 {
-    if(argc<3){
-      cout << "To run: ./PageRankSerial filename numLoops" << endl;
-      cout << "./PageRankSerial networkDatasets/toyGraph1.txt 5" << endl;
+    if(argc < 4){
+      cout << "To run: ./PageRankSerial filename numLoops debugMode(0 or 1)" << endl;
+      cout << "./PageRankSerial graph8722.txt 5 0" << endl;
       return 0;
     }
       
@@ -72,6 +72,7 @@ int main(int argc, char** argv)
 
     fstream myfile(argv[1],std::ios_base::in);
     int numLoops = atoi(argv[2]);
+    int debugMode = atoi(argv[3]);
     int u,v;
     int maxNode = 0;
     vector<pair<int,int> > allEdges;
@@ -125,10 +126,13 @@ int main(int argc, char** argv)
     }
     
     // Print out starting values
-    cout << "STARTING VALUES" << endl;
-    printVector(nodes, true);
-    cout << endl;
-    
+    if(debugMode == 1)
+    {
+        cout << "STARTING VALUES" << endl;
+        printVector(nodes, true);
+        cout << endl;
+    }
+
     //==============================//
     //      START ITERATIONS        //
     //==============================//
@@ -136,9 +140,12 @@ int main(int argc, char** argv)
     cout << "Going through iterations..." << endl;
     for(int i = 0; i < numLoops; i++)
     {
-        cout << "=====================" << endl;
-        cout << "HELLO!!! I'M LOOP #" << i << "     :D" << endl;
-        cout << "=====================" << endl << endl;
+        if(debugMode == 1)
+        {
+            cout << "=====================" << endl;
+            cout << "HELLO!!! I'M LOOP #" << i << "     :D" << endl;
+            cout << "=====================" << endl << endl;
+        }
         
         // calc new page ranks
         for(int j = 0; j < n; j++)
@@ -159,9 +166,13 @@ int main(int argc, char** argv)
         }   
 
         //print out results of loop
-        printVector(nodes, false);
-        cout << endl;
+        if(debugMode == 1)
+        {
+            printVector(nodes, false);
+            cout << endl;
+        }      
     }
+    cout << "Done!" << endl;
 
     //stop clock
     clock_gettime(CLOCK_MONOTONIC, &finish);

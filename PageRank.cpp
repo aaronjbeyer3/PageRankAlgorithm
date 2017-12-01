@@ -1,7 +1,7 @@
 //CSCI415; Aaron Beyer/Leighton Covington/Brian Engelbrecht, 11/28/2017
 //To compile: g++ -std=c++11 -O3 -w PageRank.cpp -lpthread -o PageRank
-//To run: ./PageRank filename numLoops numThreads
-//./PageRank graph8722.txt 5 2
+//To run: ./PageRank filename numLoops numThreads debugMode(0 or 1)
+//./PageRank graph8722.txt 5 2 0
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -106,15 +106,16 @@ void *ProcessChunk(void *threadarg)
 
 int main(int argc, char** argv)
 {
-    if(argc<4){
-      cout << "To run: ./PageRank filename numLoops numThreads" << endl;
-      cout << "./PageRank networkDatasets/toyGraph1.txt 5 8" << endl;
+    if(argc < 5){
+      cout << "To run: ./PageRank filename numLoops numThreads debugMode(0 or 1)" << endl;
+      cout << "./PageRank graph8722.txt 5 8 0" << endl;
       return 0;
     }    
 
     fstream myfile(argv[1],std::ios_base::in);
     int numLoops = atoi(argv[2]);
     thread_count = atoi(argv[3]);
+    int debugMode = atoi(argv[4]);
     int u,v;
     int maxNode = 0;
     vector<pair<int,int> > allEdges;
@@ -168,9 +169,12 @@ int main(int argc, char** argv)
     }
     
     // Print out starting values
-    if(debugMode) cout << "STARTING VALUES" << endl;
-    if(debugMode) printVector(nodes, true);
-    if(debugMode) cout << endl;
+    if(debugMode == 1) 
+    {
+        cout << "STARTING VALUES" << endl;
+        printVector(nodes, true);
+        cout << endl;
+    }
 
     // Initialize multithreading variables
 	pthread_t threads[thread_count];
@@ -192,9 +196,12 @@ int main(int argc, char** argv)
     cout << "Going through iterations..." << endl;
     for(int i = 0; i < numLoops; i++)
     {
-        if(debugMode) cout << "=====================" << endl;
-        if(debugMode) cout << "HELLO!!! I'M LOOP #" << i << "     :D" << endl;
-        if(debugMode) cout << "=====================" << endl << endl;
+        if(debugMode == 1) 
+        {
+            cout << "=====================" << endl;
+            cout << "HELLO!!! I'M LOOP #" << i << "     :D" << endl;
+            cout << "=====================" << endl << endl;
+        }
         
         
         // (Step 1) Calc new page ranks
@@ -229,8 +236,11 @@ int main(int argc, char** argv)
         }
 
         //print out results of loop
-        if(debugMode) printVector(nodes, false);
-        if(debugMode) cout << endl;    
+        if(debugMode == 1) 
+        {
+            printVector(nodes, false);
+            cout << endl;
+        }
     }
     cout << "Done!" << endl;
 
