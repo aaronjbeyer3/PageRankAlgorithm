@@ -23,10 +23,10 @@ int thread_count;
 int n;
 
 // Used to hold data for each thread while multithreading
-struct thread_data {
+struct thread_data
+{
 	int start;
 	int end;
-    int step;
 };
 
 // Used to hold data for each node in the graph
@@ -79,7 +79,8 @@ void calculatePageRank(int i)
 {
     float sumOfInfluence = 0.0;
     
-    for(int k = 0; k < nodes[i].pointers.size(); k++){
+    for(int k = 0; k < nodes[i].pointers.size(); k++)
+    {
         int p = nodes[i].pointers[k];
         sumOfInfluence += (nodes[p].pr/nodes[p].outD);
     }
