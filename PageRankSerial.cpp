@@ -1,7 +1,7 @@
 //CSCI415; Aaron Beyer/Leighton Covington/Brian Engelbrecht, 11/28/2017
 //To compile: g++ -std=c++11 -O3 -w PageRankSerial.cpp -o PageRankSerial
 //To run: ./PageRankSerial filename numLoops debugMode(0 or 1)
-//./PageRankSerial graph8722.txt 5 0
+//./PageRankSerial graph5000Nodes.txt 20 0
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -61,7 +61,7 @@ int main(int argc, char** argv)
 {
     if(argc < 4){
       cout << "To run: ./PageRankSerial filename numLoops debugMode(0 or 1)" << endl;
-      cout << "./PageRankSerial graph8722.txt 5 0" << endl;
+      cout << "./PageRankSerial graph5000Nodes.txt 20 0" << endl;
       return 0;
     }
       

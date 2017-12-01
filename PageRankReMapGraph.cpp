@@ -1,7 +1,7 @@
 //CSCI415; Aaron Beyer/Leighton Covington/Brian Engelbrecht, 11/28/2017
 //To compile: g++ -std=c++11 -O3 -w PageRankReMapGraph.cpp -o PageRankReMapGraph
 //To run: ./PageRankReMapGraph filename minOutgoing
-//./PageRankReMapGraph graph8722.txt 5
+//./PageRankReMapGraph graph8722.txt 50
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -21,7 +21,7 @@ int main(int argc, char** argv)
     if(argc < 3)
     {
       cout << "To run: ./PageRankReMapGraph filename minOutgoing" << endl;
-      cout << "./PageRankReMapGraph networkDatasets/toyGraph1.txt 5" << endl;
+      cout << "./PageRankReMapGraph graph8722.txt 50" << endl;
       return 0;
     }
 

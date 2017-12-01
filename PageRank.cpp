@@ -1,7 +1,7 @@
 //CSCI415; Aaron Beyer/Leighton Covington/Brian Engelbrecht, 11/28/2017
 //To compile: g++ -std=c++11 -O3 -w PageRank.cpp -lpthread -o PageRank
 //To run: ./PageRank filename numLoops numThreads debugMode(0 or 1)
-//./PageRank graph8722.txt 5 2 0
+//./PageRank graph5000Nodes.txt 20 4 0
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -109,7 +109,7 @@ int main(int argc, char** argv)
 {
     if(argc < 5){
       cout << "To run: ./PageRank filename numLoops numThreads debugMode(0 or 1)" << endl;
-      cout << "./PageRank graph8722.txt 5 8 0" << endl;
+      cout << "./PageRank graph5000Nodes.txt 20 4 0" << endl;
       return 0;
     }    
 
