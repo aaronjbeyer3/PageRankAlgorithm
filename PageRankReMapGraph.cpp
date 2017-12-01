@@ -18,10 +18,10 @@ AdjacencyMatrix adjMatrix;
 
 int main(int argc, char** argv)
 {
-    if(argc<3)
+    if(argc < 3)
     {
-      cout<<"To run: ./PageRankReMapGraph filename minOutgoing"<<endl;
-      cout<<"./PageRankReMapGraph networkDatasets/toyGraph1.txt 5"<<endl;
+      cout << "To run: ./PageRankReMapGraph filename minOutgoing" << endl;
+      cout << "./PageRankReMapGraph networkDatasets/toyGraph1.txt 5" << endl;
       return 0;
     }
 
@@ -119,25 +119,26 @@ int main(int argc, char** argv)
             {
                 existingPointer = true;
 
-                //Keep checking till finds a number not pointed to yet
+                // Keep checking till finds a number not pointed to yet
                 while(existingPointer)
                 {
                     existingPointer = false;
-                    randIndex = (rand()%n);
+                    randIndex = (rand() % n);
 
-                    //check if node already points to it
-                    for(int x=0; x<tempALLPointers.size(); x++)
+                    // Check if node already points to it
+                    for(int x = 0; x < tempALLPointers.size(); x++)
                     {
                         if(randIndex == tempALLPointers[x])
                         {
                             existingPointer = true;
                             //cout << "[Node: " << allEdges[i].second << "] ALREADY points to " << randIndex << endl;
-                        }
-                        else if(randIndex == allEdges[i].second)
-                        {
-                            existingPointer = true;
-                            //cout << "[Node: " << allEdges[i].second << "] Cannot point to itself! " << randIndex << endl;
-                        }
+                        }                      
+                    }
+                    // Check if it is same value as node
+                    if(randIndex == allEdges[i].second)
+                    {
+                        existingPointer = true;
+                        //cout << "[Node: " << allEdges[i].second << "] Cannot point to itself! " << randIndex << endl;
                     }
                 }
                 //cout << "[Node: " << allEdges[i].second << "] --> " << randIndex << endl;
@@ -157,7 +158,7 @@ int main(int argc, char** argv)
     string file_name = "graph" + std::to_string(killMe.size()) + "Nodes.txt";
     
     ofstream out(file_name.c_str());
-    for(int i=0; i < allEdges.size(); i++)
+    for(int i = 0; i < allEdges.size(); i++)
     {
         out << allEdges[i].first << " " << allEdges[i].second << endl;
     }
