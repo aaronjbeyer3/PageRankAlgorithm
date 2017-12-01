@@ -12,6 +12,7 @@
 
 using namespace std;
 
+// Used to hold data for each node in the graph
 struct nodeData
 {
     float pr;
@@ -26,6 +27,7 @@ int n;
 typedef vector<vector<int> > AdjacencyMatrix;
 AdjacencyMatrix adjMatrix;
 
+// Prints out value of nodes vector for each node
 void printVector(vector<nodeData> nD, bool printAll)
 {
   float sum = 0.0;
@@ -58,8 +60,8 @@ void printVector(vector<nodeData> nD, bool printAll)
 int main(int argc, char** argv)
 {
     if(argc<3){
-      cout<<"To run: ./PageRankSerial filename numLoops"<<endl;
-      cout<<"./PageRankSerial networkDatasets/toyGraph1.txt 5"<<endl;
+      cout << "To run: ./PageRankSerial filename numLoops" << endl;
+      cout << "./PageRankSerial networkDatasets/toyGraph1.txt 5" << endl;
       return 0;
     }
       
@@ -74,48 +76,8 @@ int main(int argc, char** argv)
     int maxNode = 0;
     vector<pair<int,int> > allEdges;
 
-
-
-    //vector pair to remap i guess
-      //vector<int> killMe;
-      //bool existsU, existsV;
     while(myfile >> u >> v)
-    {
-      /*
-      //Code to re-map graph. Not needed anymore.
-        existsU = false;
-        existsV = false;
-
-        //check to see if it exists
-        for(int i = 0; i < killMe.size(); i++)
-        {
-          if(killMe[i] == u)
-          {
-            u = i;
-            existsU = true;
-          }
-          else if(killMe[i] == v)
-          {
-            v = i;
-            existsV = true;
-          }
-        }
-
-        //if u doesn't exist
-        if(!existsU)
-        {
-          killMe.push_back(u);
-          u = killMe.size() - 1;           
-        }
-
-        //if v doesn't exist
-        if(!existsV)
-        {
-          killMe.push_back(v);   
-          v = killMe.size() - 1;          
-        }
-      */
-
+    {     
       allEdges.push_back(make_pair(u,v));
       if(u > maxNode)
         maxNode = u;
@@ -123,42 +85,6 @@ int main(int argc, char** argv)
       if(v > maxNode)
         maxNode = v;                 
     }
-
-    /*// Map nodes that don't point to anything.
-      int newNode=0;
-      int tempSize = allEdges.size();
-      int addedSize = tempSize;
-      bool dirExists;
-      for(int i=0; i<tempSize; i++)
-      {
-          dirExists = false;
-          for(int j=0; j<addedSize; j++)
-          {
-            if(allEdges[i].second == allEdges[j].first)
-              dirExists = true;
-          }
-          
-          //if it doesn't exist as a first, make it point to a node
-          if(!dirExists)
-          {
-            allEdges.push_back(make_pair(allEdges[i].second,newNode));
-            newNode++;
-            addedSize++;
-          }
-      }
-    */
-
-    /*//OUTPUT GRAPH TO FILE HERE!!!!!
-      string file_name = "graph" + std::to_string(killMe.size()) + ".txt";
-      
-      ofstream out(file_name.c_str());
-      for(int i=0; i < allEdges.size(); i++)
-      {
-        out << allEdges[i].first << " " << allEdges[i].second << endl;
-      }
-
-      out.close();
-    */
 
     n = maxNode +1;  //Since nodes starts with 0
     cout << endl;
@@ -173,7 +99,7 @@ int main(int argc, char** argv)
        //adjMatrix[v][u] = 1; directed graph so this line removed
     }
 
-    // initialize nodes
+    // Set nodes vector values
     vector<nodeData> nodes = vector<nodeData>(n);
     for(int i = 0; i < n; i++)
     {
@@ -188,7 +114,7 @@ int main(int argc, char** argv)
         nodes[i] = temp;
     }
     
-    // populate pointer vectors for each node
+    // Populate pointer vectors for each node
     for(int i = 0; i < n; i++)
     {
         for(int j = 0; j < n; j++)
@@ -198,40 +124,38 @@ int main(int argc, char** argv)
         }
     }
     
-    //test print
+    // Print out starting values
     cout << "STARTING VALUES" << endl;
     printVector(nodes, true);
     cout << endl;
     
-    //===============================================================================
-    //START LOOPING HERE
-    //===============================================================================
+    //==============================//
+    //      START ITERATIONS        //
+    //==============================//
     vector<float> newPageRanks = vector<float>(n);
+    cout << "Going through iterations..." << endl;
     for(int i = 0; i < numLoops; i++)
     {
         cout << "=====================" << endl;
         cout << "HELLO!!! I'M LOOP #" << i << "     :D" << endl;
-        cout << "=====================" << endl;
+        cout << "=====================" << endl << endl;
         
         // calc new page ranks
-        for(int i = 0; i < n; i++)
+        for(int j = 0; j < n; j++)
         {
-            //cout << endl;
-            //cout << "CURRENT NODE: " << i << endl;
             float sumOfInfluence = 0.0;
             
-            for(int k = 0; k < nodes[i].pointers.size(); k++){
-                int p = nodes[i].pointers[k];
+            for(int k = 0; k < nodes[j].pointers.size(); k++){
+                int p = nodes[j].pointers[k];
                 sumOfInfluence += (nodes[p].pr/nodes[p].outD);
             }
             
-            
-            newPageRanks[i] = (1-S_VALUE)/n + (sumOfInfluence * S_VALUE);
+            newPageRanks[j] = (1-S_VALUE)/n + (sumOfInfluence * S_VALUE);
         }
         
         // sets new page rank
-        for(int i = 0; i < n; i++){
-            nodes[i].pr = newPageRanks[i];
+        for(int j = 0; j < n; j++){
+            nodes[j].pr = newPageRanks[j];
         }   
 
         //print out results of loop
