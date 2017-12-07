@@ -64,11 +64,6 @@ int main(int argc, char** argv)
       cout << "./PageRankSerial graph5000Nodes.txt 20 0" << endl;
       return 0;
     }
-      
-    //start timer
-    struct timespec start, finish;
-    double elapsed;
-    clock_gettime(CLOCK_MONOTONIC, &start);
 
     fstream myfile(argv[1],std::ios_base::in);
     int numLoops = atoi(argv[2]);
@@ -133,6 +128,11 @@ int main(int argc, char** argv)
         cout << endl;
     }
 
+    //start timer
+    struct timespec start, finish;
+    double elapsed;
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    
     //==============================//
     //      START ITERATIONS        //
     //==============================//
